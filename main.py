@@ -4,7 +4,6 @@ import pyzbar.pyzbar as pyzbar
 import pyttsx3
 import time
 import os.path
-import json
 from datetime import datetime
 
 def create_folder():
@@ -36,37 +35,35 @@ userData=dict() #to store the current status
 log_file=create_folder()
 
 text_speech = pyttsx3.init()
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 while True:
     _, frame = cap.read()
     decodedObjects = pyzbar.decode(frame)
     if decodedObjects:
-        print(decodedObjects)
         data = ""
         c_time=time.time()
-        if decodedObjects[0].data != "":
+        if decodedObjects[0].data and decodedObjects[0].type=='CODE128':
             data = decodedObjects[0].data
-        if last_read != data:
-            read = str(data,'utf-8')
-            if read in userData:
-                    print("duplicate")
-                    if userData[read] == "IN":
-                        add(read,"OUT")
-                        last_read = data
-                    else:
-                        add(read, 'IN')
-                        last_read = data
+            if last_read != data:
+                read = str(data,'utf-8')
+                if read in userData:
+                        print("duplicate")
+                        if userData[read] == "IN":
+                            add(read,"OUT")
+                            last_read = data
+                        else:
+                            add(read, 'IN')
+                            last_read = data
+                else:
+                    add(read,"IN")
+                    last_read = data
+            elif c_time-last_time>30 and last_read != 'null':
+                last_read='null'
             else:
-                add(read,"IN")
-                last_read = data
-        elif c_time-last_time>30 and last_read != 'null':
-            last_read='null'
-        else:
-            print("wait")
-            text_speech.say(f"wait {int(30-(time.time()-last_time))} seconds, to read again the same card ")
-            text_speech.runAndWait()
-
+                print("wait")
+                text_speech.say(f"wait {int(30-(time.time()-last_time))} seconds, to read again the same card ")
+                text_speech.runAndWait()
     cv2.imshow("Frame", frame)
-    key = cv2.waitKey(1)
+    key = cv2.waitKey(100)
     if key == 27:
         break
