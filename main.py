@@ -63,7 +63,6 @@ while True:
                 print("wait")
                 text_speech.say(f"wait {int(30-(time.time()-last_time))} seconds, to read again the same card ")
                 text_speech.runAndWait()
-    cv2.imshow("Frame", frame)
-    key = cv2.waitKey(100)
-    if key == 27:
+    cv2.imshow("Barcoder Reader", frame)
+    if cv2.waitKey(1)==27:
         break
