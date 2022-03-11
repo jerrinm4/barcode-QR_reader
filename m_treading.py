@@ -19,9 +19,9 @@ def create_folder():
 
 #fuction to add attentence
 def add():
-    global c_acc,c_status, key,last_time
+    global c_acc, c_status, key, last_time
     while True:
-        if key==True:
+        if key:
             c_datetime=datetime.now().strftime('%d/%m/%Y %H:%M:%S')
             print(userData)
             with open (log_file,'a') as log:
@@ -42,7 +42,7 @@ key=stoper=False
 c_acc=c_status=""
 log_file=create_folder()
 text_speech = pyttsx3.init()
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 t1=threading.Thread(target=add)
 t1.start()
 while True:
@@ -50,7 +50,7 @@ while True:
     decodedObjects = pyzbar.decode(frame)
     if decodedObjects:
         data = ""
-        if decodedObjects[0].data and decodedObjects[0].type=='CODE128' and key==False:
+        if decodedObjects[0].data and decodedObjects[0].type=='CODE128' and not key:
             c_time=time.time()
             data = decodedObjects[0].data
             if last_read != data:
