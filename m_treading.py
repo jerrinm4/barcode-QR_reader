@@ -19,9 +19,9 @@ def create_folder():
 
 #fuction to add attentence
 def add():
-    global c_acc, c_status, key, last_time
+    global c_acc, c_status, w_key, last_time
     while True:
-        if key:
+        if w_key:
             c_datetime=datetime.now().strftime('%d/%m/%Y %H:%M:%S')
             print(userData)
             with open (log_file,'a') as log:
@@ -29,7 +29,7 @@ def add():
             text_speech.say(f"you are {c_status}")
             text_speech.runAndWait()
             last_time=time.time()
-            key=False
+            w_key=False
         elif stoper:
             break
         else:
@@ -38,11 +38,11 @@ def add():
 last_read = "null" #to store late read data
 last_time = time.time() #to sore last in or out time
 userData=dict() #to store the current status
-key=stoper=False
+w_key=stoper=False
 c_acc=c_status=""
 log_file=create_folder()
 text_speech = pyttsx3.init()
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 t1=threading.Thread(target=add)
 t1.start()
 while True:
@@ -50,7 +50,10 @@ while True:
     decodedObjects = pyzbar.decode(frame)
     if decodedObjects:
         data = ""
-        if decodedObjects[0].data and decodedObjects[0].type=='CODE128' and not key:
+        #show rectangle on qr and barcode
+        (x, y, w, h) = decodedObjects[0].rect
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (127,255,0), 2)
+        if decodedObjects[0].data and decodedObjects[0].type=='CODE128' and not w_key:
             c_time=time.time()
             data = decodedObjects[0].data
             if last_read != data:
@@ -61,21 +64,22 @@ while True:
                         if userData[read] == "IN":
                             c_status,c_acc="OUT",read
                             userData[c_acc] = c_status
-                            key=True
+                            w_key=True
                             last_read = data
                         else:
                             c_status,c_acc="IN",read
                             userData[c_acc] = c_status
-                            key=True
+                            w_key=True
                             last_read = data
                 else:
                     c_status,c_acc="IN",read
                     userData[c_acc] = c_status
-                    key=True
+                    w_key=True
                     last_read = data
             elif c_time-last_time>30 and last_read != 'null':
                 last_read='null'
     cv2.imshow("Barcoder Reader", frame)
     if cv2.waitKey(1)==27:
         stoper=True
+        t1.join()
         break
