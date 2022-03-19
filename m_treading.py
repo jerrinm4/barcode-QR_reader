@@ -5,6 +5,7 @@ import time
 import os.path
 import threading
 from datetime import datetime
+import csv
 
 def create_folder():
     year=datetime.now().year
@@ -15,6 +16,10 @@ def create_folder():
         os.mkdir(f"./attentence/{year}")
     if not os.path.exists(f"./attentence/{year}/{month}/"):
         os.mkdir(f"./attentence/{year}/{month}/")
+    if not os.path.exists("./attentence/attentence.csv"):
+        with open('./attentence/attentence.csv', 'w') as csvfile:
+            csvwriter = csv.writer(csvfile)
+            csvwriter.writerow(['ID','STATUS','DATE & TIME'])
     return f"./attentence/{year}/{month}/{datetime.now().strftime('%d-%m-%Y')}.txt"
 
 #fuction to add attentence
@@ -24,6 +29,9 @@ def add():
         if w_key:
             c_datetime=datetime.now().strftime('%d/%m/%Y %H:%M:%S')
             print(userData)
+            with open('./attentence/attentence.csv', 'a', newline='') as csvfile:
+                csvwriter = csv.writer(csvfile)
+                csvwriter.writerow([c_acc,c_status,c_datetime])
             with open (log_file,'a') as log:
                 log.write(f"ID: {c_acc}, Status: {c_status}, DateTime: {c_datetime}\n")
             text_speech.say(f"you are {c_status}")
@@ -57,7 +65,6 @@ while True:
             c_time=time.time()
             data = decodedObjects[0].data
             if last_read != data:
-                print(data)
                 read = str(data,'utf-8')
                 if read in userData:
                         print("duplicate")
