@@ -6,42 +6,51 @@ import os.path
 import threading
 from datetime import datetime
 import csv
+def git_push():
+    from git import Repo
+    try:
+        repo = Repo(os.path.join(os.getcwd(),'.git'))
+        repo.git.add('.')
+        repo.index.commit(datetime.now().strftime('%d-%m-%Y'))
+        origin = repo.remote(name='origin')
+        origin.push('master')
+    except:
+        print("error on git push")
 
 def create_folder():
     year=datetime.now().year
     month=datetime.now().strftime("%B")
+    date=datetime.now().strftime('%d-%m-%Y')
     if not os.path.exists("./attentence"):
         os.mkdir("./attentence")
     if not os.path.exists(f"./attentence/{year}"):
         os.mkdir(f"./attentence/{year}")
     if not os.path.exists(f"./attentence/{year}/{month}/"):
         os.mkdir(f"./attentence/{year}/{month}/")
-    if not os.path.exists("./attentence/attentence.csv"):
-        with open('./attentence/attentence.csv', 'w') as csvfile:
+    if not os.path.exists(f"./attentence/{year}/{month}/{date}.csv"):
+        with open(f"./attentence/{year}/{month}/{date}.csv", 'w', newline="") as csvfile:
             csvwriter = csv.writer(csvfile)
-            csvwriter.writerow(['ID','STATUS','DATE & TIME'])
-    return f"./attentence/{year}/{month}/{datetime.now().strftime('%d-%m-%Y')}.txt"
+            csvwriter.writerow(['ID','STATUS','DATE','TIME'])
+    return f"./attentence/{year}/{month}/{date}.csv"
 
 #fuction to add attentence
 def add():
     global c_acc, c_status, w_key, last_time
     while True:
         if w_key:
-            c_datetime=datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+            c_datetime=datetime.now()
             print(userData)
-            with open('./attentence/attentence.csv', 'a', newline='') as csvfile:
+            with open(log_file, 'a', newline='') as csvfile:
                 csvwriter = csv.writer(csvfile)
-                csvwriter.writerow([c_acc,c_status,c_datetime])
-            with open (log_file,'a') as log:
-                log.write(f"ID: {c_acc}, Status: {c_status}, DateTime: {c_datetime}\n")
-            text_speech.say(f"you are {c_status}")
+                csvwriter.writerow([c_acc,c_status,c_datetime.strftime('%d/%m/%Y'),c_datetime.strftime('%H:%M:%S')])
+            text_speech.say(f"you are {c_status.lower()}")
             text_speech.runAndWait()
             last_time=time.time()
             w_key=False
         elif stoper:
             break
         else:
-            time.sleep(2)
+            time.sleep(1)
 #gobal variables
 last_read = "null" #to store late read data
 last_time = time.time() #to sore last in or out time
@@ -49,7 +58,10 @@ userData=dict() #to store the current status
 w_key=stoper=False
 c_acc=c_status=""
 log_file=create_folder()
+#git_push()
 text_speech = pyttsx3.init()
+text_speech.setProperty("rate", 125)
+text_speech.setProperty('voice', 'english_rp+f4')
 cap = cv2.VideoCapture(0)
 t1=threading.Thread(target=add)
 t1.start()

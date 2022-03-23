@@ -2,3 +2,4 @@ opencv-python
 numpy
 pyzbar
 pyttsx3
+gitpython
