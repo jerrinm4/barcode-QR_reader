@@ -1,0 +1,16 @@
+sudo apt install ntpdate
+sudo ntpdate -s ntp.ubuntu.com
+sudo dpkg-reconfigure tzdata
+
+sudo timedatectl set-timezone Asia/Kolkata
+
+
+timedatectl list-timezones
+sudo apt-get remove tzdata
+sudo apt-get install tzdata
+
+sudo apt install chromium-browser -y
+chromium-browser
+
+
+https://worldtimeapi.org/api/timezone/Asia/Kolkata

@@ -1,0 +1,6 @@
+opencv-python
+numpy
+pyzbar
+gitpython
+flask
+flask_qrcode
