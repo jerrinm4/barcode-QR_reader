@@ -8,12 +8,12 @@ import csv
 from flask import Flask, render_template, Response, jsonify
 from flask_qrcode import QRcode
 
-# gpio
-import RPi.GPIO as GPIO
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-bz=27
-GPIO.setup(bz,GPIO.OUT)
+# # gpio
+# import RPi.GPIO as GPIO
+# GPIO.setwarnings(False)
+# GPIO.setmode(GPIO.BCM)
+# bz=27
+# GPIO.setup(bz,GPIO.OUT)
 
 last_push = ""
 def git_push():
@@ -56,7 +56,7 @@ def addatt():
             w_key = False 
             c_datetime = datetime.now()
             read_json={'name': c_acc[0],'adno': c_acc[2],'batch': c_acc[1],'status':c_status,'time': c_datetime.strftime('%H:%M:%S')}
-            GPIO.output(bz,GPIO.HIGH)
+            # GPIO.output(bz,GPIO.HIGH)
             print(userData, end='\r')
             with open(log_file, 'a', newline='') as csvfile:
                 csvwriter = csv.writer(csvfile)
@@ -65,7 +65,7 @@ def addatt():
             last_time = time.time()
             time.sleep(.5)
             print("beep")
-            GPIO.output(bz,GPIO.LOW)
+            # GPIO.output(bz,GPIO.LOW)
 
         elif stoper:
             break
@@ -108,14 +108,11 @@ def scan():
                     if adNo in userData:
                         if userData[adNo] == "IN":
                             c_status, c_acc = "OUT", read
-                            userData[adNo] = c_status
-                            w_key = True
-                            last_read = data
                         elif userData[adNo] == "OUT":
                             c_status, c_acc = "IN", read
-                            userData[adNo] = c_status
-                            w_key = True
-                            last_read = data
+                        userData[adNo] = c_status
+                        w_key = True
+                        last_read = data
                     else:
                         c_status, c_acc = "IN", read
                         userData[adNo] = c_status
