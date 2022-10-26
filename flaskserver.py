@@ -93,8 +93,7 @@ def scan():
         _, frame = cap.read()
         decodedObjects = pyzbar.decode(frame)
         if decodedObjects:
-            data = ""
-            adNo = -1
+            data ,adNo ="", -1
             # show rectangle on qr and barcode
             (x, y, w, h) = decodedObjects[0].rect
             cv2.rectangle(frame, (x, y), (x + w, y + h), (127, 255, 0), 2)
