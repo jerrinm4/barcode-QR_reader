@@ -45,7 +45,7 @@ def create_folder():
         with open(f"./attentence/{year}/{month}/{date}.csv", 'w', newline="") as csvfile:
             csvwriter = csv.writer(csvfile)
             csvwriter.writerow(['ADNo', 'NAME', 'BATCH', 'STATUS', 'DATE', 'TIME'])
-    return f"/attentence/{year}/{month}/{date}.csv"
+    return f"./attentence/{year}/{month}/{date}.csv"
 
 
 
