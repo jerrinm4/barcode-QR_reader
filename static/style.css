@@ -40,8 +40,9 @@
 }
 
 #something {
-    display:flexbox;
+    display: list-item;
     align-items: center;
+    justify-content: center;
     background-color: rgb(24, 255, 55);
     border-radius: 15px;
     padding: 10px;
