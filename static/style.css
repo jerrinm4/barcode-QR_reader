@@ -4,16 +4,12 @@
 .card {
     margin-top: 80px;
 }
-
 #clock {
     font-family: courier, monospace;
     text-align: center;
     color: white;
     font-size: 30px;
 }
-
-
-
 #date {
     font-family: courier, monospace;
     text-align: center;
@@ -24,8 +20,6 @@
     bottom: 0;
     right: 0;
 }
-
-
 #day {
     font-family: courier, monospace;
     text-align: center;
@@ -37,14 +31,6 @@
     left: 0;
     bottom: 0;
     right: 0;
-}
-
-#something {
-    background-color: rgb(24, 255, 55);
-    border-radius: 15px;
-    padding: 10px;
-    text-align: center;
-    height: 250px;
 }
 #something {
     background-color: rgb(24, 255, 55);
