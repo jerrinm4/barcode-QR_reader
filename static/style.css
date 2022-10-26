@@ -50,10 +50,6 @@
     background-color: rgb(24, 255, 55);
     border-radius: 15px;
     padding: 10px;
+    padding-top: 30px;
     height: 250px;
-}
-#justi{
-    display: flex;
-    align-items: center;
-    height: 200px;
 }
