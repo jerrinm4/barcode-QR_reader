@@ -28,9 +28,8 @@ def git_push():
         repo.index.commit(datetime.now().strftime('%d-%m-%Y'))
         origin = repo.remote(name='origin')
         re = origin.push('master')
-        print("git push done", re)
     except:
-        print("error on git push")
+        print("error on git push",end='\r')
 
 
 def create_folder():
@@ -67,7 +66,6 @@ def addatt():
                                     c_datetime.strftime('%H:%M:%S')])
             last_time = time.time()
             time.sleep(.5)
-            print("beep")
             # GPIO.output(bz,GPIO.LOW)
 
         elif stoper:
