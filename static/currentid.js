@@ -4,6 +4,7 @@ $(document).ready(function () {
   function quote() {
     $.getJSON("https://api.quotable.io/random", function (data) {
       $("#something").html(
+        "<q><b>" +
           data["content"] +
           "</q><br>-- <q>" +
           data["author"] +
