@@ -51,11 +51,9 @@
     border-radius: 15px;
     padding: 10px;
     height: 250px;
+}
+#justi{
     display: flex;
     align-items: center;
-}
-
-#something b{
-    background-color: aqua;
-    display:table-cell;
+    height: 200px;
 }
