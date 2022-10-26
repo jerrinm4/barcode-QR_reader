@@ -1,3 +1,5 @@
+const id_read = 1500; // To set id read time
+const id_t_out = 3000; // To set it show timeout
 $(document).ready(function () {
   $("#detialss").hide();
   var lst_data = "";
@@ -46,8 +48,8 @@ $(document).ready(function () {
           $("#idcard").addClass("bg-dark");
           $("#detialss").hide();
           $("#qr").show();
-        }, 3000);
+        }, id_t_out);
       }
     });
-  }, 2000);
+  }, id_read);
 });
