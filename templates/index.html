@@ -28,7 +28,7 @@ body {
       <nav class="navbar bg-primary justify-content-center">
         <a class="navbar-brand" href="#">
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
-            src="{{ url_for('static', filename='ymbc-logo.png', icon_img='icon.jpg')}}"
+            src="{{ url_for('static', filename='ymbc-logo.png')}}"
             height="50"
             class="d-inline-block align-top"
             alt=""
@@ -87,7 +87,7 @@ body {
                   <img
                     width="250px"
                     style="border: 10px solid rgb(255, 255, 255)"
-                    src="{{ qrcode(qr) }}"
+                    src="{{ qrcode(qr,icon_img='icon.jpg') }}"
                   />
                 </div>
               </div>
