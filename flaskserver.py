@@ -29,7 +29,7 @@ def git_push():
         origin = repo.remote(name='origin')
         re = origin.push('master')
     except:
-        print("error on git push",end='\r')
+        print("error on git push", end='\r')
 
 
 def create_folder():

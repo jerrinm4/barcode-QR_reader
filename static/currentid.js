@@ -25,11 +25,11 @@ $(document).ready(function () {
         $("#idcard").removeClass("bg-dark");
         $("#idcard").addClass("bg-warning");
         content =
-          "<br><b>ADNo:  " +
-          data["adno"] +
-          "<br><h3>" +
+          "<br><b><h4>" +
           data["name"] +
-          "</h3>Batch: " +
+          "</h4>ADNo: " +
+          data["adno"] +
+          "<br>Batch: " +
           data["batch"] +
           "<br><br>Time:  " +
           data["time"] +
