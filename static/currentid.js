@@ -1,5 +1,5 @@
 const id_read = 1500; // To set id read time
-const id_t_out = 3000; // To set it show timeout
+const id_t_out = 30000; // To set it show timeout
 $(document).ready(function () {
   $("#detialss").hide();
   var lst_data = "";
