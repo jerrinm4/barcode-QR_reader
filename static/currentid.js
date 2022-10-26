@@ -6,7 +6,7 @@ $(document).ready(function () {
       $("#something").html(
         "<q><b>" +
           data["content"] +
-          "</q>--"+"\n"+" <q>" +
+          "</q><br>-- <q>" +
           data["author"] +
           "</b></q>"
       );

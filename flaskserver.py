@@ -110,14 +110,11 @@ def scan():
                             c_status, c_acc = "OUT", read
                         elif userData[adNo] == "OUT":
                             c_status, c_acc = "IN", read
-                        userData[adNo] = c_status
-                        w_key = True
-                        last_read = data
                     else:
                         c_status, c_acc = "IN", read
-                        userData[adNo] = c_status
-                        w_key = True
-                        last_read = data
+                    userData[adNo] = c_status
+                    w_key = True
+                    last_read = data
                 elif c_time - last_time > 15 and last_read != 'null':
                     last_read = 'null'
         ret, buffer = cv2.imencode('.jpg', frame)
