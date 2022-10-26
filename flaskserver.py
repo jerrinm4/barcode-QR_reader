@@ -130,7 +130,7 @@ app = Flask(__name__)
 QRcode(app)
 @app.route('/')
 def index():
-    return render_template('index.html',qr="https://github.com/RANDDLABS/Attendance-Log/tree/master"+log_file)
+    return render_template('index.html',qr="https://github.com/RANDDLABS/Attendance-Log/tree/master"+log_file[1::])
 
 @app.route('/video_feed')
 def video_feed():
