@@ -52,4 +52,6 @@
     padding: 10px;
     text-align: center;
     height: 250px;
+    display: flex;
+    align-items: center;
 }
