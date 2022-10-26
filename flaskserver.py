@@ -16,6 +16,8 @@ from flask_qrcode import QRcode
 # GPIO.setup(bz,GPIO.OUT)
 
 last_push = ""
+
+
 def git_push():
     from git import Repo
     global last_push
@@ -44,18 +46,19 @@ def create_folder():
     if not os.path.exists(f"./attentence/{year}/{month}/{date}.csv"):
         with open(f"./attentence/{year}/{month}/{date}.csv", 'w', newline="") as csvfile:
             csvwriter = csv.writer(csvfile)
-            csvwriter.writerow(['ADNo', 'NAME', 'BATCH', 'STATUS', 'DATE', 'TIME'])
+            csvwriter.writerow(
+                ['ADNo', 'NAME', 'BATCH', 'STATUS', 'DATE', 'TIME'])
     return f"./attentence/{year}/{month}/{date}.csv"
-
 
 
 def addatt():
     global c_acc, c_status, w_key, last_time, read_json
     while True:
         if w_key:
-            w_key = False 
+            w_key = False
             c_datetime = datetime.now()
-            read_json={'name': c_acc[0],'adno': c_acc[2],'batch': c_acc[1],'status':c_status,'time': c_datetime.strftime('%H:%M:%S')}
+            read_json = {'name': c_acc[0], 'adno': c_acc[2], 'batch': c_acc[1],
+                         'status': c_status, 'time': c_datetime.strftime('%H:%M:%S')}
             # GPIO.output(bz,GPIO.HIGH)
             print(userData, end='\r')
             with open(log_file, 'a', newline='') as csvfile:
@@ -76,10 +79,7 @@ def addatt():
 
 
 # gobal variables
-read_json= {}
-last_read = "null"  # to store late read data
-last_time = time.time()  # to sore last in or out time
-userData = dict()  # to store the current status
+read_json, last_read, last_time, userData = {}, "null", time.time(), dict()
 w_key = stoper = False
 c_acc = c_status = ""
 log_file = create_folder()
@@ -87,13 +87,15 @@ git_push()
 cap = cv2.VideoCapture(0)
 t1 = threading.Thread(target=addatt)
 t1.start()
+
+
 def scan():
-    global w_key, last_read,c_status, c_acc, read_json
+    global w_key, last_read, c_status, c_acc, read_json
     while True:
         _, frame = cap.read()
         decodedObjects = pyzbar.decode(frame)
         if decodedObjects:
-            data ,adNo ="", -1
+            data, adNo = "", -1
             # show rectangle on qr and barcode
             (x, y, w, h) = decodedObjects[0].rect
             cv2.rectangle(frame, (x, y), (x + w, y + h), (127, 255, 0), 2)
@@ -122,18 +124,19 @@ def scan():
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 
-
-
-
 app = Flask(__name__)
 QRcode(app)
+
+
 @app.route('/')
 def index():
-    return render_template('index.html',qr="https://github.com/RANDDLABS/Attendance-Log/tree/master"+log_file[1::])
+    return render_template('index.html', qr="https://github.com/RANDDLABS/Attendance-Log/tree/master"+log_file[1::])
+
 
 @app.route('/video_feed')
 def video_feed():
     return Response(scan(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 @app.route('/c_id')
 def current_id():
