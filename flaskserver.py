@@ -1,4 +1,5 @@
 import cv2
+import imutils as imutils
 import pyzbar.pyzbar as pyzbar
 import time
 import os.path
@@ -104,7 +105,7 @@ def scan():
     while True:
         _, frame = cap.read()
         frame.flags.writeable = False
-        cv2
+        frame = imutils.resize(frame, width=450)
         decodedObjects = pyzbar.decode(frame)
         if decodedObjects:
             data, adNo = "", -1
