@@ -9,8 +9,7 @@ from flask import Flask, render_template, Response, jsonify
 from flask_qrcode import QRcode
 
 
-prev_frame_time = 0
-new_frame_time = 0
+
 
 
 # # gpio
@@ -91,9 +90,12 @@ cap = cv2.VideoCapture(0)
 t1 = threading.Thread(target=addatt)
 t1.start()
 
+prev_frame_time = 0
+new_frame_time = 0
+
 
 def scan():
-    global w_key, last_read, c_status, c_acc, read_json
+    global w_key, last_read, c_status, c_acc, read_json,prev_frame_time,new_frame_time
     while True:
         _, frame = cap.read()
         frame.flags.writeable = False
