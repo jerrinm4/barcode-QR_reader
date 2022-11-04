@@ -87,8 +87,8 @@ c_acc = c_status = ""
 log_file = create_folder()
 git_push()
 cap = cv2.VideoCapture(0)
-cap.set(cv2.CV_CAP_PROP_FRAME_WIDTH, 450)
-cap.set(cv2.CV_CAP_PROP_FRAME_HEIGHT, 337)
+cap.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, 450)
+cap.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, 337)
 t1 = threading.Thread(target=addatt)
 t1.start()
 
