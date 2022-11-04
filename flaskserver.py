@@ -123,7 +123,8 @@ def scan():
                             c_status= "IN",
                     else:
                         c_status,  = "IN"
-                    c_acc,userData[adNo], w_key,last_read=read, c_status,True,data
+                    c_acc=read.last_read
+                    userData[adNo], w_key,= c_status,True,data
                 elif c_time - last_time > 15 and last_read != 'null':
                     last_read = 'null'
 
