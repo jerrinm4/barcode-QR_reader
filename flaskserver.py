@@ -105,6 +105,7 @@ def scan():
     while True:
         _, frame = cap.read()
         frame.flags.writeable = False
+        cv2
         decodedObjects = pyzbar.decode(frame)
         if decodedObjects:
             data, adNo = "", -1
