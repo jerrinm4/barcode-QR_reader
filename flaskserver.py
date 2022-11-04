@@ -116,16 +116,14 @@ def scan():
                     read = str(data, 'utf-8').split("#")
                     if len(read) == 3:
                         adNo = read[2]
-                    if adNo in userData:
-                        if userData[adNo] == "IN":
-                            c_status, c_acc = "OUT", read
-                        elif userData[adNo] == "OUT":
-                            c_status, c_acc = "IN", read
-                    else:
-                        c_status, c_acc = "IN", read
-                    userData[adNo] = c_status
-                    w_key = True
-                    last_read = data
+                        if adNo in userData:
+                            if userData[adNo] == "IN":
+                                c_status= "OUT"
+                            elif userData[adNo] == "OUT":
+                                c_status= "IN",
+                        else:
+                            c_status,  = "IN"
+                        c_acc,userData[adNo], w_key,last_read=read, c_status,True,data
                 elif c_time - last_time > 15 and last_read != 'null':
                     last_read = 'null'
 
@@ -133,7 +131,7 @@ def scan():
         new_frame_time = time.time()
         fps = 1 // (new_frame_time - prev_frame_time)
         prev_frame_time = new_frame_time
-        fps =  str(fps)
+        fps = str(fps)
         cv2.putText(frame, fps, (1, 40), font, 1, (100, 255, 0), 1, cv2.LINE_AA)
 
 
