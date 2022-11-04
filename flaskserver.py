@@ -91,11 +91,13 @@ def scan():
     global w_key, last_read, c_status, c_acc, read_json
     while True:
         _, frame = cap.read()
+        frame.flags.writeable = True
         decodedObjects = pyzbar.decode(frame)
         if decodedObjects:
             data, adNo = "", -1
             # show rectangle on qr and barcode
             (x, y, w, h) = decodedObjects[0].rect
+            # frame.flags.writeable = True
             cv2.rectangle(frame, (x, y), (x + w, y + h), (127, 255, 0), 2)
             if decodedObjects[0].data and decodedObjects[0].type == 'QRCODE' and not w_key:
                 c_time = time.time()
