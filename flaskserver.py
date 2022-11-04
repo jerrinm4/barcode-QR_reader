@@ -8,6 +8,11 @@ import csv
 from flask import Flask, render_template, Response, jsonify
 from flask_qrcode import QRcode
 
+
+prev_frame_time = 0
+new_frame_time = 0
+
+
 # # gpio
 # import RPi.GPIO as GPIO
 # GPIO.setwarnings(False)
@@ -119,13 +124,13 @@ def scan():
                 elif c_time - last_time > 15 and last_read != 'null':
                     last_read = 'null'
 
-                    
+        font = cv2.FONT_HERSHEY_SIMPLEX
         new_frame_time = time.time()
         fps = 1 / (new_frame_time - prev_frame_time)
         prev_frame_time = new_frame_time
         fps = int(fps)
         fps = str(fps)
-        cv2.putText(gray, fps, (7, 70), font, 3, (100, 255, 0), 3, cv2.LINE_AA)
+        cv2.putText(frame, fps, (7, 70), font, 3, (100, 255, 0), 3, cv2.LINE_AA)
 
 
         ret, buffer = cv2.imencode('.jpg', frame)
