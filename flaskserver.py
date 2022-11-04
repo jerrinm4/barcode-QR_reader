@@ -91,7 +91,7 @@ cap = cv2.VideoCapture(0)
 # cap = cv2.VideoCapture(0, cv2.CAP_DSHOW) # this is the magic!
 #
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 450)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 337)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 360)
 
 t1 = threading.Thread(target=addatt)
 t1.start()
