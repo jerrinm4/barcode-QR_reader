@@ -131,11 +131,10 @@ def scan():
 
         font = cv2.FONT_HERSHEY_SIMPLEX
         new_frame_time = time.time()
-        fps = 1 / (new_frame_time - prev_frame_time)
+        fps = 1 // (new_frame_time - prev_frame_time)
         prev_frame_time = new_frame_time
-        fps = int(fps)
-        fps = str(fps)
-        cv2.putText(frame, fps, (1, 20), font, 1, (100, 255, 0), 1, cv2.LINE_AA)
+        fps =  str(fps)
+        cv2.putText(frame, fps, (1, 40), font, 1, (100, 255, 0), 1, cv2.LINE_AA)
 
 
         ret, buffer = cv2.imencode('.jpg', frame)
