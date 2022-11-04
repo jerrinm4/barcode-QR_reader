@@ -90,8 +90,8 @@ cap = cv2.VideoCapture(0)
 #
 # cap = cv2.VideoCapture(0, cv2.CAP_DSHOW) # this is the magic!
 #
-# cap.set(cv2.CAP_PROP_FRAME_WIDTH, 800)
-# cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 600)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 800)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 600)
 
 t1 = threading.Thread(target=addatt)
 t1.start()
@@ -167,6 +167,6 @@ def current_id():
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
     stoper = True
     t1.join()
