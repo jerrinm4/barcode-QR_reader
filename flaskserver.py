@@ -91,7 +91,7 @@ def scan():
     global w_key, last_read, c_status, c_acc, read_json
     while True:
         _, frame = cap.read()
-        frame.flags.writeable = True
+        frame.flags.writeable = False
         decodedObjects = pyzbar.decode(frame)
         if decodedObjects:
             data, adNo = "", -1
