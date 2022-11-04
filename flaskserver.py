@@ -116,14 +116,14 @@ def scan():
                     read = str(data, 'utf-8').split("#")
                     if len(read) == 3:
                         adNo = read[2]
-                        if adNo in userData:
-                            if userData[adNo] == "IN":
-                                c_status= "OUT"
-                            elif userData[adNo] == "OUT":
-                                c_status= "IN",
-                        else:
-                            c_status,  = "IN"
-                        c_acc,userData[adNo], w_key,last_read=read, c_status,True,data
+                    if adNo in userData:
+                        if userData[adNo] == "IN":
+                            c_status= "OUT"
+                        elif userData[adNo] == "OUT":
+                            c_status= "IN",
+                    else:
+                        c_status,  = "IN"
+                    c_acc,userData[adNo], w_key,last_read=read, c_status,True,data
                 elif c_time - last_time > 15 and last_read != 'null':
                     last_read = 'null'
 
