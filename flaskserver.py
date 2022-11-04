@@ -86,12 +86,12 @@ w_key = stoper = False
 c_acc = c_status = ""
 log_file = create_folder()
 git_push()
-# cap = cv2.VideoCapture(0)
-
-cap = cv2.VideoCapture(0, cv2.CAP_DSHOW) # this is the magic!
-
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+cap = cv2.VideoCapture(0)
+# 
+# cap = cv2.VideoCapture(0, cv2.CAP_DSHOW) # this is the magic!
+#
+# cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+# cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
 t1 = threading.Thread(target=addatt)
 t1.start()
