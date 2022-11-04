@@ -135,7 +135,7 @@ def scan():
         prev_frame_time = new_frame_time
         fps = int(fps)
         fps = str(fps)
-        cv2.putText(frame, fps, (1, 7), font, 1, (100, 255, 0), 3, cv2.LINE_AA)
+        cv2.putText(frame, fps, (1, 7), font, 1, (100, 255, 0), 1, cv2.LINE_AA)
 
 
         ret, buffer = cv2.imencode('.jpg', frame)
