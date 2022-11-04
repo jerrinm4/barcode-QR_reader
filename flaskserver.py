@@ -88,10 +88,8 @@ c_acc = c_status = ""
 log_file = create_folder()
 git_push()
 cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 450)
 t1 = threading.Thread(target=addatt)
 t1.start()
-
 prev_frame_time = 0
 new_frame_time = 0
 
@@ -120,7 +118,7 @@ def scan():
                         if userData[adNo] == "IN":
                             c_status= "OUT"
                         elif userData[adNo] == "OUT":
-                            c_status= "IN",
+                            c_status= "IN"
                     else:
                         c_status  = "IN"
                     c_acc,userData[adNo], w_key,last_read=read, c_status,True,data
